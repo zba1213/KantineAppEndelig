@@ -33,5 +33,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<KantineDbContext>();
+    db.Database.EnsureCreated();  // Opretter databasen hvis den ikke findes
+}
 app.MapRazorPages();
 app.Run();
