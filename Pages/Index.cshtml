@@ -1,0 +1,28 @@
+﻿@page
+@model KantineApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Forside";
+}
+<div class="container">
+    <h1>Velkommen til kantinen 🍽️</h1>
+    <p>Bestil mad, se dagens ret og få 10% rabat (ekskl. drikkevarer)</p>
+    <div class="feature-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        <div class="feature-card" style="background: white; padding: 1.5rem; border-radius: 12px;"><h3>📋 Bestil mad</h3><p>Brug dit medarbejderkort</p><a href="/Order" class="btn btn-primary">Gå til bestilling</a></div>
+        <div class="feature-card" style="background: white; padding: 1.5rem; border-radius: 12px;"><h3>⭐ Dagens ret</h3>@if (Model.TodaysSpecial != null) {
+        <p><strong>@Model.TodaysSpecial.MenuItem?.Name</strong></p>
+        <p>@Model.TodaysSpecial.MenuItem?.Price kr.</p>
+  } else
+{
+            <p>Ingen dagens ret</p>
+        }
+</div>
+        <div class="feature-card" style="background: white; padding: 1.5rem; border-radius: 12px;"><h3>🔥 Ugens tilbud</h3>@if (Model.WeeklyOffer != null) {
+        <p><strong>@Model.WeeklyOffer.Title</strong></p>
+        <p>@Model.WeeklyOffer.Description</p>
+  } else
+{
+            <p>Intet tilbud</p>
+        }
+</div>
+    </div>
+</div>

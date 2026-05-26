@@ -1,0 +1,24 @@
+﻿@page
+@model KantineApp.Pages.MenuItemsModel
+@{
+    ViewData["Title"] = "Administrer menu";
+}
+<div class="container">
+    <h1>🍽️ Administrer menu</h1>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;">
+        <div style="background:white;padding:20px;border-radius:12px;">
+            <h2>Tilføj ny ret</h2>
+            <form method="post">
+                <input asp-for="NewMenuItem.Name" placeholder="Navn" style="width:100%;margin-bottom:10px;" />
+                <input asp-for="NewMenuItem.Description" placeholder="Beskrivelse" style="width:100%;margin-bottom:10px;" />
+                <input asp-for="NewMenuItem.Price" placeholder="Pris" style="width:100%;margin-bottom:10px;" />
+                <label><input asp-for="NewMenuItem.IsDrink" type="checkbox" /> Er drikkevare?</label>
+                <button type="submit" style="width:100%;margin-top:10px;padding:12px;background:black;color:white;">Tilføj</button>
+            </form>
+        </div>
+        <div><h2>Eksisterende retter</h2><div>@foreach (var item in Model.MenuItems) {
+        <div style="background:white;padding:15px;margin-bottom:10px;border-radius:12px;"><h3>@item.Name</h3><p>@item.Description</p><p>@item.Price kr.</p><form method="post" asp-page-handler="Delete" asp-route-id="@item.Id"><button type="submit" style="background:#dc3545;color:white;padding:5px 10px;">Slet</button></form></div>
+                }
+</div></div>
+    </div>
+</div>

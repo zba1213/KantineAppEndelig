@@ -1,0 +1,37 @@
+﻿@page
+@model KantineApp.Pages.WeeklyOfferModel
+@{
+    ViewData["Title"] = "Ugens tilbud";
+}
+<div class="container">
+    <h1>🔥 Ugens tilbud</h1>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div style="background:#d4edda;padding:12px;border-radius:8px;">@TempData["SuccessMessage"]</div>
+    }
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;">
+        <div style="background:white;padding:20px;border-radius:12px;">
+            <h2>Opret tilbud</h2>
+            <form method="post">
+                <input asp-for="NewOffer.Title" placeholder="Titel" style="width:100%;margin-bottom:10px;" />
+                <textarea asp-for="NewOffer.Description" placeholder="Beskrivelse" style="width:100%;margin-bottom:10px;"></textarea>
+                <input asp-for="NewOffer.ValidFrom" type="date" style="width:100%;margin-bottom:10px;" />
+                <input asp-for="NewOffer.ValidTo" type="date" style="width:100%;margin-bottom:10px;" />
+                <button type="submit" name="action" value="Save" style="width:100%;padding:12px;background:black;color:white;">Gem</button>
+                <button type="submit" name="action" value="SendEmail" style="width:100%;padding:12px;background:green;color:white;margin-top:10px;">Gem + Send email</button>
+            </form>
+        </div>
+        <div style="background:white;padding:20px;border-radius:12px;">
+            <h2>Nuværende tilbud</h2>
+            @if (Model.CurrentOffer != null)
+            {
+                <div><h3>@Model.CurrentOffer.Title</h3><p>@Model.CurrentOffer.Description</p><p>@Model.CurrentOffer.ValidFrom.ToString("dd/MM/yyyy") - @Model.CurrentOffer.ValidTo.ToString("dd/MM/yyyy")</p><form method="post" asp-page-handler="Delete" asp-route-id="@Model.CurrentOffer.Id"><button type="submit" style="background:#dc3545;color:white;">Slet</button></form></div>
+            }
+            else
+            {
+
+                <p>Intet aktivt tilbud</p>
+            }
+        </div>
+    </div>
+</div>

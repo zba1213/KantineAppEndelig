@@ -1,0 +1,25 @@
+﻿@page
+@model KantineApp.Pages.OrdersListModel
+@{
+    ViewData["Title"] = "Alle ordrer";
+}
+<div class="container">
+    <h1>📊 Alle ordrer</h1>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:20px;">
+        @foreach (var order in Model.Orders)
+        {
+            <div style="background:white;border-radius:12px;overflow:hidden;">
+                <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:15px;"><h3>Ordre #@order.Id</h3><span>@order.OrderTime.ToString("dd/MM/yyyy HH:mm")</span></div>
+                <div style="padding:15px;">
+                    <p><strong>Medarbejder:</strong> @order.Employee?.Name (Nr. @order.EmployeeId)</p>
+                    <p><strong>Afhentning:</strong> @order.PickupTime.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Total:</strong> @order.TotalAmount.ToString("N0") kr.</p>
+                    <ul>@foreach (var line in order.OrderLines) {
+                    <li>@line.Quantity x @line.MenuItem?.Name - @((line.UnitPrice * line.Quantity).ToString("N0")) kr.</li>
+                }
+</ul>
+            </div>
+        </div>
+                }
+    </div>
+</div>
