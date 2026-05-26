@@ -14,10 +14,5 @@ namespace KantineApp.Data
         public DbSet<OrderLine> OrderLines { get; set; }
         public DbSet<DailySpecial> DailySpecials { get; set; }
         public DbSet<WeeklyOffer> WeeklyOffers { get; set; }
-
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
