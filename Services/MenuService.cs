@@ -3,7 +3,7 @@ using KantineApp.Repository;
 
 namespace KantineApp.Services
 {
-    // Service for handling business logic related to MenuItems
+    // Service for handling business logic related to MenuItemss
     public class MenuService
     {
         private readonly IMenuRepository _menuRepo;
